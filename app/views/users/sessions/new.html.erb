@@ -1,0 +1,41 @@
+<div class="container p-4 min-vh-100">
+  <div class="row d-flex justify-content-center align-items-center">
+    <div class="col-4 ">
+      <div class="card sign-in">
+        <div class="card-body p-8 text-center ">
+          <h2><%= t('user.login') %></h2>
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+            <div class="field">
+              <%= f.email_field :email, class: "form-control", placeholder: t('user.email'), 
+                  autofocus: true, autocomplete: "email" %>
+            </div>
+            <div class="field">
+              <%= f.password_field :password, class: "form-control", placeholder: t('user.password'), 
+                  autocomplete: "current-password" %>
+            </div>
+            <div class="row mb-4">
+              <div class="col d-flex justify-content-center">
+                <% if devise_mapping.rememberable? %>
+                  <div class="field form-group form-check">
+                    <%= f.check_box :remember_me, class: "form-check-input" %>
+                    <%= f.label t('user.remember'), for: "flexCheckIndeterminate"%>
+                  </div>
+                <% end %>
+              </div>
+              <div class="col">
+                <%= link_to t('user.forgot_password'), new_user_password_path %>
+              </div>
+            </div>
+            <div class="actions">
+              <%= f.submit t('user.login'), class: "btn btn-primary px-4" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-5">
+      <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+        class="img-fluid" alt="Sign in">
+    </div>
+  </div>
+</div>

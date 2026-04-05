@@ -1,0 +1,9 @@
+<div class="dropdown">
+  <button class="btn dropdown-toggle" type="button" id="dropdownMenuLocales" data-bs-toggle="dropdown" aria-expanded="false">
+    <%= t('nav.language') %>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLocales">
+    <li><%= link_to t('nav.en'), {locale: :en}, { class: "dropdown-item" } %></li>
+    <li><%= link_to t('nav.ru'), {locale: :ru}, { class: "dropdown-item" } %></li>
+  </ul>
+</div>

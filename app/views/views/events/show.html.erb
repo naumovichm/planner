@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row ">
+    <div class="col-sm-6 p-4">
+      <h2><%= @event.name %></h2>
+      <p><%= @event.description %></p>
+      <div class="d-flex align-items-center mb-4">
+        <i class="me-auto"><%= l(@event.event_date, format: :default) %></i>
+        <b><%= @event.category.name %></b>
+      </div>
+      <% if @event.reminder_on %>
+        <div class="mb-4">
+          <%= t('event.reminder') %><%= l(@event.reminder_on, format: :default) %>
+        </div>
+      <% end %>
+      <div class="col-sm-6 btns d-flex align-items-center">
+        <% if @event.valid? %>
+          <%= link_to t('btn.edit'), edit_event_path(@event.id, locale: I18n.locale), 
+           class: "btn btn-primary me-auto px-4" %>
+        <% end %>
+        <%= button_to t('btn.delete'), event_path(@event.id, locale: I18n.locale), 
+           method: :delete, class: "btn btn-danger" %>
+      </div>
+    </div>
+  </div>
+</div>

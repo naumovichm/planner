@@ -1,0 +1,156 @@
+ru:
+
+  activerecord:
+    attributes:
+      user:
+        first_name: "Имя"
+        last_name: "Фамилия"
+        password: "Пароль"
+        email: "Почта"
+        current_password: "Текущий пароль"
+      category:
+        name: "Категория"
+      event:
+        name: "Название"
+        event_date: "Дата события"
+        reminder_on: "Дата напоминания"
+    errors:
+      models:
+        user:
+          attributes:
+            email: 
+              blank: "не может быть пустой"
+        category:
+          attributes:
+            name: 
+              blank: "не может быть пустой"
+        event:
+          attributes:
+            name: 
+              blank: "не может быть пустым"
+            event_date: 
+              blank: "не может быть пустой"
+              past: "не может быть в прошлом"
+            reminder_on: 
+              past: "не может быть в прошлом"
+              too_late: "не может быть равной или больше даты события"
+
+  time:
+    formats:
+      default: "%Y-%m-%d %H:%M"
+  
+  nav:
+    company: "Компания"
+    en: "АНГ"
+    ru: "РУС"
+    categories: "Категории"
+    language: "Язык"
+    me: "Я"
+    events: "События"
+    categories: "Категории"
+
+  user:
+    sign_up: "Регистрация"
+    sign_out: "Выйти"
+    edit_profile: "Изменить профиль"
+    login: "Войти"
+    first_name: "Имя"
+    last_name: "Фамилия"
+    email: "Почта"
+    password: "Пароль"
+    confirm_password: "Подтвердите пароль"
+    register: "Регистрация"
+    remember: "Запомнить меня"
+    edit: "Изменить"
+    current_password: "Текущий пароль"
+    update: "Обновить"
+    forgot_password: "Забыли пароль?"
+    future_events: "Количество будущих событий: %{count}"
+    today_events: "Количество событий сегодня: %{count}"
+    start: "Сначала войдите в систему или зарегистрируйтесь"
+    welcome: "Добро пожаловать, %{user}"
+
+  devise:
+    resend_confirm: "Отправить повторно инструкцию по подтверждению"
+    resend_btn: "Отправить"
+    welcome: "Добро пожаловать"
+    message: "Вы можете подтвердить адрес электронной почты своей учетной записи по ссылке ниже:"
+    confirm_link: "Подтвердите мою учетную запись"
+    unlock_resend: "Повторно отправьте инструкции по разблокировке"
+    message_new_email: "Мы связываемся с вами, чтобы уведомить вас о том, что ваш адрес электронной почты изменен на"
+    message_old_email: "Мы связываемся с вами, чтобы уведомить вас о том, что ваш старый адрес электронной почты"
+    message_password_changed: "Мы связываемся с вами, чтобы уведомить вас о том, что ваш пароль был изменен."
+    request_change_password: "Кто-то запросил ссылку для смены вашего пароля. Вы можете сделать это по ссылке ниже."
+    change_password: "Изменить пароль"
+    forgot_password: "Забыли пароль?"
+    message_ignore: "Если вы не запрашивали это, пожалуйста, проигнорируйте это электронное письмо."
+    message_lock: "Ваша учетная запись была заблокирована из-за чрезмерного количества неудачных попыток входа в систему"
+    message_unlock: "Нажмите на ссылку ниже, чтобы разблокировать свою учетную запись:"
+    unlock_btn: "Разблокировать"
+    change_btn: "Изменить"
+    instruction_btn: "Отправить инструкцию"
+    confirm_link: "Подтвердить учетную запись"
+
+  category:
+    name: "Имя"
+    creation: "Создать категорию"
+    categories: "Категории"
+    category: "Категория"
+    edit: "Изменить категорию"
+    no_categories: "Нет категорий"
+    
+  flash:
+    notice: 
+      category:
+        create: 'Категория успешно создана'
+        delete: 'Категория успешно удалена'
+        update: 'Категория успешно обновлена'
+      event:
+        create: 'Событие успешно создано'
+        delete: 'Событие успешно удалено'
+        update: 'Событие успешно обновлено'
+
+  event:
+    name: "Название"
+    category: "Категория"
+    time: "Время"
+    edit: "Изменение"
+    create: "Создание события"
+    events: "События"
+    description: "Описание"
+    category: "Категория"
+    reminder: "Напомнить в"
+    weather: "Погода в этот день"
+    info: "Информация недоступна"
+    no_events: "Нет событий"
+
+  btn:
+    add: "Добавить"
+    edit: "Изменить"
+    create: "Создать"
+    delete: "Удалить"
+    search: "Поиск"
+    submit: "Подтвердить"
+
+  pagination:
+    next: "Следующая"
+    last: "Последняя"
+    first: "Первая"
+    previous: "Предыдущая"
+
+  weather:
+    temperature: "Температура:"
+    on_the_street: "На улице:"
+    summary: "Описание:"
+    choose_time: "Выберите время:"
+
+  mailer:
+    greetings: "Привет, %{user}"
+    coming_event: "Мы отправляем вам это электронное письмо, чтобы напомнить, что %{event_name} скоро!"
+    date: "Дата: %{event_date}"
+    thanks: "Благодарим вас за то, что воспользовались нашим сервисом!"
+    event_link: "Ваше мероприятие"
+
+  views:
+    pagination:
+      truncate: "..."

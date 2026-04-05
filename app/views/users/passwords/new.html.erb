@@ -1,0 +1,19 @@
+<div class="container p-4">
+  <div class="row d-flex justify-content-center align-items-center">
+    <div class="card col-4 p-4 new-password">
+      <div class="card-body p-4 text-center">
+        <h2><%= t('devise.forgot_password') %></h2>
+        <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+          <%= render partial: "users/shared/error_messages", locals: { user: resource, attribute: :email } %>
+          <div class="field">
+            <%= f.email_field :email, class: 'form-control', autofocus: true, 
+                autocomplete: "email", placeholder: t('user.email') %>
+          </div>
+          <div class="actions">
+            <%= f.submit t('devise.instruction_btn'), class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

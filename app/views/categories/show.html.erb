@@ -1,0 +1,10 @@
+<div class="row d-flex justify-content-center align-items-center p-4">
+  <h1 class="text-center"><%= t ('category.category') %></h1>
+  <div class="col-2">
+    <h2 class="text-center"><%= @category.name %></h2>
+    <div class=" d-flex align-items-center justify-content-center">
+      <%= link_to t('btn.edit'), edit_category_path(@category, locale: I18n.locale), class: "btn btn-primary me-2" %>
+      <%= button_to t('btn.delete'), category_path(@category, locale: I18n.locale), method: :delete, class: "btn btn-danger" %>
+    </div>
+  </div>
+</div>

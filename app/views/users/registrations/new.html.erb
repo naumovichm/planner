@@ -1,0 +1,43 @@
+<div class="container p-4 min-vh-100">
+  <div class="row d-flex justify-content-center align-items-center">
+    <div class="col-4 ">
+      <div class="card sign-up">
+        <div class="card-body p-8 text-center">
+          <h2><%= t('user.sign_up') %></h2>
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+            <%= render partial: "users/shared/error_messages", locals: { user: resource, attribute: :first_name } %>
+            <div class="field">
+              <%= f.text_field :first_name , class: "form-control", placeholder: t('user.first_name'), autofocus: true %>
+            </div>
+            <div class="field">
+              <%= f.text_field :last_name, class: "form-control", placeholder: t('user.last_name'), autofocus: true %>
+            </div>
+            <%= render partial: "users/shared/error_messages", locals: { user: resource, attribute: :email } %>
+            <div class="field">
+              <%= f.email_field :email, class: "form-control", placeholder: t('user.email'), 
+                  autofocus: true, autocomplete: "email" %>
+            </div>
+            <%= render partial: "users/shared/error_messages", locals: { user: resource, attribute: :password } %>
+            <div class="field">
+              <%= f.password_field :password, class: "form-control", placeholder: t('user.password'), 
+                  autocomplete: "new-password" %>
+            </div>
+            <%= render partial: "users/shared/error_messages", 
+                locals: { user: resource, attribute: :password_confirmation } %>
+            <div class="field">
+              <%= f.password_field :password_confirmation, class: "form-control", placeholder: t('user.confirm_password'), 
+                  autocomplete: "new-password" %>
+            </div>
+            <div class="actions">
+              <%= f.submit t('user.register'), class: "btn btn-primary" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-5">
+      <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+        class="img-fluid" alt="Sign up">
+    </div>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<div class="container p-4 min-vh-100 mb-4">
+  <h1 class="text-center mb-4"><%= t('category.categories')%> </h1>
+  <div class="container mb-4 col-4">
+    <%= render partial: 'categories/partials/categories', locals: { categories: @categories } %>
+    <%= link_to t('btn.create'), new_category_path, class: "btn btn-primary mb-4" %>
+    <div class="col-sm-3 mb-4">
+      <%= select_tag :per_page, options_for_select([5, 10, 20, 30], params[:per_page]), 
+          class:"form-select" %>
+    </div>
+    <%= paginate @categories %>
+  </div>
+</div>

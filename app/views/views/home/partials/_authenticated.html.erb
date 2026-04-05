@@ -1,0 +1,15 @@
+<div class="container p-4 min-vh-100">
+  <div class="row d-flex justify-content-center ">
+    <div class="col-5">
+      <h1>
+        <%= t('user.welcome', user: user.user_name) %>
+      </h1>
+      <p><%= t('user.future_events', count: user.future_events_count) %></p>
+      <p><%= t('user.today_events', count: user.today_events_count) %></p>
+    </div>
+    <div class="col-lg-4 d-none d-lg-flex">
+      <img src="https://mdbootstrap.com/img/new/ecommerce/vertical/004.jpg" alt="Home"
+        class="w-100 rounded-t-5 rounded-tr-lg-0 rounded-bl-lg-5" />
+    </div>
+  </div>
+</div>

@@ -1,0 +1,4 @@
+<p><%= t('devise.welcome') %> <%= @resource.email %>!</p>
+<p><%= t('devise.message_lock') %>.</p>
+<p><%= t('devise.unlock') %></p>
+<p><%= link_to t('devise.unlock_btn'), unlock_url(@resource, unlock_token: @token, locale: I18n.locale)) %></p>

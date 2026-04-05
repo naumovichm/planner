@@ -1,0 +1,134 @@
+en:
+
+  activerecord:
+    errors:
+      models:
+        event:
+          attributes:
+            event_date: 
+              past: "can't be in the past"
+            reminder_on: 
+              past: "can't be in the past"
+              too_late: "can't be equal or greater than event date"
+
+  time:
+    formats:
+      default: "%Y-%m-%d %H:%M"
+
+  nav:
+    company: "Company"
+    en: "EN"
+    ru: "RU"
+    categories: "Categories"
+    language: "Language"
+    me: "Me"
+    events: "Events"
+    categories: "Categories"
+
+  user:
+    sign_up: "Sign Up"
+    sign_out: "Sign out"
+    edit_profile: "Edit profile"
+    login: "Login"
+    first_name: "First name"
+    last_name: "Last name"
+    email: "Email"
+    password: "Password"
+    confirm_password: "Password confirmation"
+    register: "Register"
+    remember: "Remember me"
+    edit: "Edit"
+    current_password: "Current password"
+    update: "Update"
+    forgot_password: "Forgot password?"
+    future_events: "You have events in future: %{count}"
+    today_events: "You have events today: %{count}"
+    start: "Login or Sign Up first"
+    welcome: "Welcome, %{user}"
+
+  devise:
+    resend_confirm: "Resend confirmation instructions"
+    resend_btn: "Resend"
+    welcome: "Welcome"
+    message: "You can confirm your account email through the link below:"
+    confirm_link: "Confirm my account"
+    unlock_resend: "Resend unlock instructions"
+    message_new_email: "We're contacting you to notify you that your email has been changed to"
+    message_old_email: "We're contacting you to notify you that your email is being changed to"
+    message_password_changed: "We're contacting you to notify you that your password has been changed."
+    request_change_password: "Someone has requested a link to change your password. You can do this through the link below."
+    change_password: "Change your password"
+    forgot_password: "Forgot your password?"
+    message_ignore: "If you didn't request this, please ignore this email."
+    message_lock: "Your account has been locked due to an excessive number of unsuccessful sign in attempts"
+    message_unlock: "Click the link below to unlock your account:"
+    unlock_btn: "Unlock"
+    change_btn: "Change"
+    instruction_btn: "Send instructions"
+    confirm_link: "Confirm my account"
+
+  category:
+    name: "Name"
+    creation: "Create category"
+    categories: "Categories"
+    category: "Category"
+    edit: "Edit category"
+    no_categories: "No Categories"
+
+  flash:
+    notice: 
+      category:
+        create: 'Category successfully created'
+        delete: 'Category successfully deleted'
+        update: 'Category updated successfully'
+      event:
+        create: 'Event successfully created'
+        delete: 'Event successfully deleted'
+        update: 'Event updated successfully'
+  
+  pagination:
+    next: "Next"
+    last: "Last"
+    first: "First"
+    previous: "Previous"
+
+  event:
+    name: "Name"
+    category: "Category"
+    time: "Time"
+    edit: "Edit event"
+    create: "Create event"
+    events: "Events"
+    name: "Name"
+    description: "Description"
+    category: "Category"
+    reminder: "Reminder at"
+    weather: "Weather in this day"
+    info: "Information is not available"
+    no_events: "No Events"
+
+  btn:
+    add: "Add"
+    edit: "Edit"
+    create: "Create"
+    delete: "Delete"
+    search: "Search"
+    submit: "Submit"
+      
+  pagination:
+    next: "Next"
+    last: "Last"
+    first: "First"
+
+  weather:
+    temperature: "Temperature:"
+    on_the_street: "On the street:"
+    summary: "Summary:"
+    chooser_time: "Choose time:"
+    
+  mailer:
+    greetings: "Hi, %{user}"
+    coming_event: "We are sending you this email to remind you that %{event_name} is coming soon!"
+    date: "Date: %{event_date}"
+    thanks: "Thank you for using our service!"
+    event_link: "Your event"

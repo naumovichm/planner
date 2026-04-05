@@ -1,0 +1,15 @@
+<% if events.empty? %>
+  <h2 class="text-center p-4"><%= t('event.no_events') %></h2>
+<% else %>
+  <table class="table table-borderless table-hover">
+    <tr class="text-center">
+      <th scope="col">#</th>
+      <th scope="col"><%= t('event.name') %></th>
+      <th scope="col"><%= t('event.category') %></th>
+      <th scope="col"><%= t('event.time') %></th>
+    </tr>
+    <% events.each_with_index do |event, index| %>
+      <%= render partial: 'events/partials/event', locals: { event: event, index: index } %>
+    <% end %>
+  </table>
+<% end %>

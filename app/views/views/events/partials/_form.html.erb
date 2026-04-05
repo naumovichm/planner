@@ -1,0 +1,27 @@
+<%= form_with model: event do |f| %>
+  <%= render partial: 'layouts/error', locals: { model: event, attribute: :name} %>
+  <div class="field mb-4">
+    <%= f.text_field :name, class: "form-control", placeholder: t('event.name') %>
+  </div>
+  <div class="field mb-4">
+    <%= f.text_field :description, class: "form-control", placeholder: t('event.description') %>
+  </div>
+  <%= render partial: 'layouts/error', locals: { model: event, attribute: :event_date} %>
+  <div class="field mb-4">
+    <%= f.datetime_field :event_date, class: "form-control", placeholder: 'Event date' %>
+  </div>
+  <%= render partial: 'layouts/error', locals: { model: event, attribute: :reminder_on} %>
+  <div class="field mb-4">
+    <%= f.datetime_field :reminder_on, class: "form-control", placeholder: 'Reminder on' %>
+  </div>
+  <%= render partial: 'layouts/error', locals: { model: event, attribute: :category} %>
+  <div class="field mb-4">
+    <%= f.collection_select :category_id, current_user.categories, :id, :name,
+                            { prompt: t('event.category'), selected: "", disabled: "" },
+                            { class: "form-control",
+                              placeholder: "Category select" } %>
+  </div>
+  <p>
+    <%= f.submit t('btn.create'), class: "btn btn-primary" %>
+  </p>
+<% end %>

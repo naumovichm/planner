@@ -1,0 +1,13 @@
+<div class="container p-4 min-vh-100 mb-4">
+  <h1 class="text-center mb-4"><%= t('event.events') %></h1>
+  <div class="container mb-4">
+    <%= render 'events/partials/search' %>
+    <%= render partial: 'events/partials/events', locals: { events: @events } %>
+    <%= link_to t('btn.add'), new_event_path, class: "btn btn-primary mb-4" %>
+    <div class="mb-4 col-sm-1">
+      <%= select_tag :per_page, options_for_select([5, 10, 20, 30], params[:per_page]), 
+          class:"form-select" %>
+    </div>
+    <%= paginate @events %>
+  </div>
+</div>

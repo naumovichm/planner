@@ -1,0 +1,8 @@
+<tr class="text-center">
+  <th scope="row">
+    <%= link_to event_numb(index), event_path(event.id, locale: I18n.locale) %>
+  </th>
+  <td><%= event.name %></td>
+  <td><%= event.category.name %></td>
+  <td><%= l(event.event_date, format: :default) %></td>
+</tr>

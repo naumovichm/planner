@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav ">
+        <li class="nav-item">
+          <h3 class="navbar-brand"><%= t('nav.company') %></h3>
+        </li>
+        <% if current_user %>
+          <li class="nav-item ">
+            <%= link_to t('nav.me'), root_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to t('nav.events'), events_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to t('nav.categories'), categories_path, class: "nav-link" %>
+          </li>
+        </ul>
+      </div>
+      <%= render partial: 'users/partials/user_dropdown' %>
+    <% else %>
+      <%= render partial: 'users/partials/entry' %>
+    </ul>
+  </div>
+<% end %>
+<%= render partial: 'layouts/locales' %>
+</div>
+</nav>

@@ -1,0 +1,22 @@
+name: Prebuild app
+description: 'Reuse similar steps for jobs'
+
+runs:
+  using: composite
+
+  steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 3.4.8
+        bundler-cache: true
+
+    - name: Set up Nodejs
+      run: sudo apt install -yqq libpq-dev
+      shell: bash
+
+    - name: Install dependencies
+      run: bundle install
+      shell: bash

@@ -1,0 +1,17 @@
+<% if categories.empty? %>
+  <h2 class="text-center p-4"><%= t('category.no_categories') %></h2>
+<% else %>
+  <table class="table table-borderless table-hover">
+    <thead>
+      <tr class="text-center">
+        <th scope="col">#</th>
+        <th scope="col"><%= t('category.name') %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% categories.each_with_index do |category, index| %>
+        <%= render partial: 'categories/partials/category', locals: { category: category, index: index } %>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

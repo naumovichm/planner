@@ -1,0 +1,21 @@
+require:
+  - rubocop-rails
+  - rubocop-rspec
+
+Style/Documentation:
+  Enabled: false
+
+Style/GlobalVars:
+  Enabled: false
+
+Layout/EndOfLine:
+  EnforcedStyle: lf
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - 'config/environments/development.rb'
+
+Rails/NotNullColumn:
+  Exclude:
+    - 'db/migrate/20260404093457_add_first_name_last_name_to_users.rb'

@@ -1,0 +1,7 @@
+<tr class="text-center">
+  <th scope="row"><%= link_to index + 1, category_path(category.id, locale: I18n.locale) %></th>
+  <td><%= category.name %></td>
+  <td>
+    <%= button_to t('btn.delete'), category_path(category.id, locale: I18n.locale), method: :delete, class: "btn btn-outline-danger" %>
+  </td>
+</tr>

@@ -1,0 +1,20 @@
+<div class="container p-4">
+  <div class="row d-flex justify-content-center align-items-center">
+    <div class="card col-4 p-4 confirmation">
+      <div class="card-body p-4 text-center">
+        <h4 class="mb-4"><%= t('devise.resend_confirm') %></h4>
+        <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+          <%= render partial: "users/shared/error_messages", locals: { user: resource, attribute: :email } %>
+          <div class="field">
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", 
+                class: "form-control mx-auto", placeholder: t('user.email'), 
+                value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
+          </div>
+          <div class="actions">
+            <%= f.submit t('devise.resend_btn'), class: "btn btn-success" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
