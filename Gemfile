@@ -89,7 +89,7 @@ group :test do
   gem 'capybara'
 
   # To test the functionality of the application [https://github.com/thoughtbot/shoulda-matchers]
-  gem 'shoulda-matchers', '~> 5.3'
+  gem 'shoulda-matchers', '~> 7.0'
 
   # Brings back assigns and assert_template to your Rails tests [https://github.com/rails/rails-controller-testing]
   gem 'rails-controller-testing'
