@@ -8,7 +8,9 @@ module CategoriesServices
       @user = user
     end
 
-    def call; end
+    def call
+      user.include_category?(category_params:) ? category.update(category_params) : update_category
+    end
 
     private
 
