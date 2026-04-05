@@ -34,3 +34,25 @@ services:
       retries: 3
       start_period: 15s
       timeout: 5s
+
+  sidekiq:
+    container_name: sidekiq
+    build: ./
+    command: bundle exec sidekiq -C config/sidekiq.yml
+    volumes:
+      - .:/planner
+    env_file:
+      - ./.env
+    depends_on:
+      - app
+      - redis
+    restart: always
+
+  redis:
+    container_name: redis
+    image: redis:7-alpine
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis-data:/data
