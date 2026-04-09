@@ -15,6 +15,7 @@ class Event < ApplicationRecord
   scope :today, -> { where(event_date: DateTime.now.beginning_of_day..DateTime.now.end_of_day) }
   scope :by_category, ->(category_id) { where(category_id:) }
   scope :by_name, ->(name) { where('name like ?', "%#{name}%") }
+  scope :for_notifications, -> { where(is_notified: false, reminder_on: ..Time.zone.now).includes(:user) }
 
   paginates_per 20
 

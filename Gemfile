@@ -26,6 +26,12 @@ gem 'stimulus-rails'
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem 'jbuilder'
 
+# Simple, efficient background processing for Ruby [https://github.com/sidekiq/sidekiq]
+gem 'sidekiq'
+
+# Lightweight job scheduler extension for Sidekiq [https://github.com/sidekiq-scheduler/sidekiq-scheduler]
+gem 'sidekiq-scheduler'
+
 # Locale data for Rails [https://github.com/svenfuchs/rails-i18n]
 gem 'rails-i18n'
 
