@@ -30,7 +30,7 @@ RSpec.describe CategoriesController, type: :controller do
       end
 
       it 'update category name' do
-        expect { category.reload }.to change { category.name }.to("NewName")
+        expect { category.reload }.to change(category, :name).to('NewName')
       end
     end
 
