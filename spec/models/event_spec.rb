@@ -59,23 +59,9 @@ RSpec.describe Event, type: :model do
     it { expect(event).to belong_to(:category).dependent(:destroy) }
   end
 
-  describe 'traits' do
-    context 'when event with description' do
-      let(:event_with_description) { build(:event, :with_description) }
-
-      it { expect(event_with_description.description).to be_a(String) }
-    end
-
-    context 'when event with reminder' do
-      let(:event_with_reminder) { build(:event, :with_reminder) }
-
-      it { expect(event_with_reminder.reminder_on).to eql(event_with_reminder.event_date - 4.hours) }
-    end
-  end
-
   describe 'scopes' do
     let!(:category) { create(:category) }
-    let!(:today_event) { create(:event, category:, event_date: DateTime.now + 10.minutes) }
+    let!(:today_event) { build(:event, category:, event_date: DateTime.now).tap { |e| e.save(validate: false) } }
     let!(:future_event) { create(:event, category:, event_date: DateTime.tomorrow) }
 
     describe '.future' do

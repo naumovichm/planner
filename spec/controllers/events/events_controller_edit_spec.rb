@@ -29,7 +29,7 @@ RSpec.describe EventsController, type: :controller do
       end
 
       it 'update event name' do
-        expect(event.reload.name).to eq('NewName')
+        expect { event.reload }.to change { event.name }.to("NewName")
       end
     end
 

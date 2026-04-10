@@ -19,26 +19,6 @@ RSpec.describe Category, type: :model do
     end
   end
 
-  describe 'traits' do
-    context "when name of category is 'Vacation'" do
-      let(:category_vacation) { build(:category, :vacation) }
-
-      it { expect(category_vacation.name).to eql 'Vacation' }
-    end
-
-    context "when name of category is 'Personal'" do
-      let(:category_personal) { build(:category, :personal) }
-
-      it { expect(category_personal.name).to eql 'Personal' }
-    end
-
-    context "when name of category is 'Work'" do
-      let(:category_work) { build(:category, :work) }
-
-      it { expect(category_work.name).to eql 'Work' }
-    end
-  end
-
   describe 'associations' do
     it { expect(category).to have_many(:events).dependent(:destroy) }
     it { expect(category).to have_many(:user_categories).dependent(:destroy) }

@@ -6,7 +6,7 @@ RSpec.describe 'Category create', type: :feature do
   let(:user) { create(:user) }
 
   describe 'when user is authenticated' do
-    let(:category) { build(:category, :work) }
+    let(:category) { build(:category) }
 
     before do
       login_as(user)
@@ -21,15 +21,13 @@ RSpec.describe 'Category create', type: :feature do
 
       it { expect(page).to have_content('Category') }
       it { expect(page).to have_content('Category successfully created') }
-      it { expect(page).to have_content('Work') }
+      it { expect(page).to have_content(category.name) }
     end
 
     describe 'name of category has already been taken' do
-      let(:category_work) { create(:category, :work) }
-
       before do
-        create(:user_category, user:, category: category_work)
-        fill_in 'Name', with: category_work.name
+        create(:user_category, user:, category: category)
+        fill_in 'Name', with: category.name
         click_button 'Create'
       end
 

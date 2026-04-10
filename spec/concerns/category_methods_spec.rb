@@ -6,7 +6,7 @@ describe 'CategoryMethods' do
   describe '.create_category' do
     subject(:create_or_find_category) { Category.create_category(category_params:) }
 
-    let(:category_work) { build(:category, :work) }
+    let(:category_work) { build(:category) }
     let(:category_params) { { name: category_work.name } }
 
     it 'create a category by name' do
@@ -14,7 +14,7 @@ describe 'CategoryMethods' do
     end
 
     it 'find a category by name' do
-      create(:category, :work)
+      Category.create(category_params)
       expect { create_or_find_category }.not_to change(Category, :count).from(1)
     end
   end

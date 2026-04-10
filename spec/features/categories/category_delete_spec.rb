@@ -7,10 +7,10 @@ RSpec.describe 'Category delete', type: :feature do
     let(:user) { create(:user) }
 
     describe 'when user is authenticated' do
-      let(:category_work) { create(:category, :work) }
+      let(:category) { create(:category) }
 
       before do
-        create(:user_category, user:, category: category_work)
+        create(:user_category, user:, category: category)
         login_as(user)
         visit categories_path
         within('.table') do

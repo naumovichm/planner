@@ -21,14 +21,6 @@ RSpec.describe 'User', type: :model do
     end
   end
 
-  describe 'traits' do
-    describe 'user with last_name' do
-      let(:user_with_last_name) { build(:user, :with_last_name) }
-
-      it { expect(user_with_last_name.last_name).to be_a(String) }
-    end
-  end
-
   describe 'associations' do
     it { expect(user).to have_many(:events).dependent(:destroy) }
     it { expect(user).to have_many(:user_categories).dependent(:destroy) }

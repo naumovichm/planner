@@ -4,8 +4,8 @@ require 'rails_helper'
 
 RSpec.describe 'Category edit', type: :feature do
   let(:user) { create(:user) }
-  let!(:category_work) { create(:category, :work) }
-  let!(:category_personal) { create(:category, :personal) }
+  let!(:category_work) { create(:category) }
+  let!(:category_personal) { create(:category) }
 
   describe 'when user is authenticated' do
     before do

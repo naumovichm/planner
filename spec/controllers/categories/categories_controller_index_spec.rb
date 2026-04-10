@@ -6,13 +6,13 @@ RSpec.describe CategoriesController, type: :controller do
   let(:user) { create(:user) }
 
   describe 'GET #index' do
-    let(:category_work) { create(:category, :work) }
+    let(:category) { create(:category) }
 
     before { get :index }
 
     describe 'when user is authenticated' do
       before do
-        create(:user_category, user:, category: category_work)
+        create(:user_category, user:, category: category)
         sign_in(user)
         get :index
       end
@@ -26,7 +26,7 @@ RSpec.describe CategoriesController, type: :controller do
       end
 
       it 'assigns @categories' do
-        expect(assigns(:categories)).to contain_exactly(category_work)
+        expect(assigns(:categories)).to contain_exactly(category)
       end
     end
 
