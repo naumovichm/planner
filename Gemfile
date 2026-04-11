@@ -99,4 +99,7 @@ group :test do
 
   # For Selenium framework [https://github.com/titusfortner/webdrivers]
   gem 'webdrivers', '~> 5.0', require: false
+
+  # For testing [https://github.com/cucumber/cucumber-rails]
+  gem 'cucumber-rails', require: false
 end
