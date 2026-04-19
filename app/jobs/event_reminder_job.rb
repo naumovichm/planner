@@ -4,7 +4,7 @@ class EventReminderJob
   include Sidekiq::Job
 
   def perform
-    Event.for_notifications.find_each do |event|
+    Event.for_notifications.includes(:user).find_each do |event|
       send_reminder(event)
     end
   end
