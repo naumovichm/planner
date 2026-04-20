@@ -89,7 +89,7 @@ group :test do
   gem 'capybara'
 
   # To test the functionality of the application [https://github.com/thoughtbot/shoulda-matchers]
-  gem 'shoulda-matchers', '~> 5.3'
+  gem 'shoulda-matchers', '~> 7.0'
 
   # Brings back assigns and assert_template to your Rails tests [https://github.com/rails/rails-controller-testing]
   gem 'rails-controller-testing'
@@ -99,4 +99,7 @@ group :test do
 
   # For Selenium framework [https://github.com/titusfortner/webdrivers]
   gem 'webdrivers', '~> 5.0', require: false
+
+  # For testing [https://github.com/cucumber/cucumber-rails]
+  gem 'cucumber-rails', require: false
 end
