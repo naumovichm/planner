@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Event < ApplicationRecord
+  include AASM
+
   belongs_to :category, dependent: :destroy
   belongs_to :user, dependent: :destroy
 
@@ -15,9 +17,25 @@ class Event < ApplicationRecord
   scope :today, -> { where(event_date: DateTime.now.beginning_of_day..DateTime.now.end_of_day) }
   scope :by_category, ->(category_id) { where(category_id:) }
   scope :by_name, ->(name) { where('name like ?', "%#{name}%") }
-  scope :for_notifications, -> { where(is_notified: false, reminder_on: ..Time.zone.now) }
+  scope :for_notifications, -> { where(reminder_status: :pending, reminder_on: ..Time.zone.now) }
 
   paginates_per 20
+
+  aasm column: :reminder_status do
+    state :no_reminder, initial: true
+    state :pending
+    state :notified
+
+    event :to_pending do
+      transitions from: :no_reminder, to: :pending
+    end
+
+    event :notify do
+      transitions from: :pending, to: :notified
+    end
+  end
+
+  before_save :set_reminder_status, if: :reminder_on_changed?
 
   private
 
@@ -35,5 +53,9 @@ class Event < ApplicationRecord
     return if event_date&.future?
 
     errors.add(:event_date, :past)
+  end
+
+  def set_reminder_status
+    to_pending if reminder_on.present?
   end
 end
