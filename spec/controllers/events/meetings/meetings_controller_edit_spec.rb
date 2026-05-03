@@ -2,13 +2,13 @@
 
 require 'rails_helper'
 
-RSpec.describe EventsController, type: :controller do
+RSpec.describe Events::MeetingsController, type: :controller do
   let(:user) { create(:user) }
 
-  describe 'PATCH /events/:id' do
-    subject(:edit_event) { patch :update, params: { id: event.id, event: { name: 'NewName' } } }
+  describe 'PATCH /events/meetings/:id' do
+    subject(:edit_event) { patch :update, params: { id: meeting.id, meeting: { name: 'NewName' } } }
 
-    let(:event) { create(:event, user:) }
+    let(:meeting) { create(:meeting, user:) }
 
     describe 'when user is authenticated' do
       before do
@@ -29,7 +29,7 @@ RSpec.describe EventsController, type: :controller do
       end
 
       it 'update event name' do
-        expect { event.reload }.to change(event, :name).to('NewName')
+        expect { meeting.reload }.to change(meeting, :name).to('NewName')
       end
     end
 
@@ -45,7 +45,7 @@ RSpec.describe EventsController, type: :controller do
       end
 
       it 'not update event name' do
-        expect(event.reload.name).not_to eq('NewName')
+        expect(meeting.reload.name).not_to eq('NewName')
       end
     end
   end

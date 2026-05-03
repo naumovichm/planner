@@ -2,20 +2,20 @@
 
 require 'rails_helper'
 
-RSpec.describe EventsController, type: :controller do
+RSpec.describe Events::MeetingsController, type: :controller do
   let(:user) { create(:user) }
 
   describe 'DELETE /events/:id' do
-    subject(:delete_event) { delete :destroy, params: { id: Event.first.id } }
+    subject(:delete_event) { delete :destroy, params: { id: Meeting.first.id } }
 
     describe 'when user is authenticated' do
       before do
         sign_in(user)
-        create(:event, user:)
+        create(:meeting, user:)
       end
 
       it 'delete event in the database' do
-        expect { delete_event }.to change(Event, :count).from(1).to(0)
+        expect { delete_event }.to change(Meeting, :count).from(1).to(0)
       end
 
       it 'redirect to events_path' do
@@ -30,10 +30,10 @@ RSpec.describe EventsController, type: :controller do
     end
 
     describe 'when user is not authenticated' do
-      before { create(:event) }
+      before { create(:meeting) }
 
       it 'not delete event in the database' do
-        expect { delete_event }.not_to change(Event, :count).from(1)
+        expect { delete_event }.not_to change(Meeting, :count).from(1)
       end
 
       it 'return status 302' do

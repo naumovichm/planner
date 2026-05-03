@@ -2,18 +2,18 @@
 
 require 'rails_helper'
 
-RSpec.describe EventsController, type: :controller do
+RSpec.describe Events::MeetingsController, type: :controller do
   let(:user) { create(:user) }
 
-  describe 'GET /events/:id' do
-    subject(:show_event) { get :show, params: { id: event.id } }
+  describe 'GET /events/meetings/:id' do
+    subject(:show_event_meeting) { get :show, params: { id: meeting.id } }
 
-    let(:event) { create(:event, user: user) }
+    let(:meeting) { create(:meeting, user: user) }
 
     describe 'when user is authenticated' do
       before do
         sign_in(user)
-        show_event
+        show_event_meeting
       end
 
       it 'return status 200' do
@@ -24,13 +24,13 @@ RSpec.describe EventsController, type: :controller do
         expect(response).to render_template('show')
       end
 
-      it 'assigns @event' do
-        expect(assigns(:event)).to eq(event)
+      it 'assigns @meeting' do
+        expect(assigns(:meeting)).to eq(meeting)
       end
     end
 
     describe 'when user in not authenticated' do
-      before { show_event }
+      before { show_event_meeting }
 
       it 'return status 302' do
         expect(response).to have_http_status(:found)

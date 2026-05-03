@@ -2,21 +2,28 @@
 
 require 'rails_helper'
 
-RSpec.describe EventsController, type: :controller do
-  describe 'POST /events/new' do
+RSpec.describe Events::MeetingsController, type: :controller do
+  describe 'POST /events/meetings/new' do
     subject(:create_event) do
       post :create,
-           params: { event: { name: category.name, event_date: DateTime.now.tomorrow, category_id: category.id } }
+           params: { meeting: {
+             name: meeting.name,
+             event_date: meeting.event_date,
+             category_id: category.id,
+             start_time: meeting.start_time,
+             end_time: meeting.end_time
+           } }
     end
 
     let(:user) { create(:user) }
+    let(:meeting) { build(:meeting) }
     let(:category) { create(:category) }
 
     describe 'when user is authenticated' do
       before { sign_in(user) }
 
       it 'save event in the database' do
-        expect { create_event }.to change(Event, :count).from(0).to(1)
+        expect { create_event }.to change(Meeting, :count).from(0).to(1)
       end
 
       it 'redirect to events_path' do
@@ -42,7 +49,7 @@ RSpec.describe EventsController, type: :controller do
       end
 
       it 'not save event in the database' do
-        expect { create_event }.not_to change(Event, :count).from(0)
+        expect { create_event }.not_to change(Meeting, :count).from(0)
       end
     end
   end
