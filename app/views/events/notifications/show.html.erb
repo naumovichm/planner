@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row ">
+    <div class="col-sm-6 p-4">
+      <h2><%= @notification.name %></h2>
+      <p><%= @notification.description %></p>
+      <div class="d-flex align-items-center mb-4">
+        <i class="me-auto"><%= l(@notification.event_date, format: :default) %></i>
+        <b><%= @notification.category.name %></b>
+      </div>
+      <div class="mb-4">
+        <%= @notification.notification_text %>
+      </div>
+      <% if @notification.reminder_on %>
+        <div class="mb-4">
+          <%= t('event.reminder') %><%= l(@notification.reminder_on, format: :default) %>
+        </div>
+      <% end %>
+      <div class="col-sm-6 btns d-flex align-items-center">
+        <% if @notification.valid? %>
+          <%= link_to t('btn.edit'), edit_events_notification_path(@notification.id, locale: I18n.locale),
+           class: "btn btn-primary me-auto px-4" %>
+        <% end %>
+        <%= button_to t('btn.delete'), events_notification_path(@notification.id, locale: I18n.locale),
+           method: :delete, class: "btn btn-danger" %>
+      </div>
+    </div>
+  </div>
+</div>

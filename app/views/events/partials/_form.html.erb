@@ -1,26 +1,48 @@
-<%= form_with model: event do |f| %>
+<%= form_with model: event, url: url do |f| %>
   <%= render partial: 'layouts/error', locals: { model: event, attribute: :name} %>
   <div class="field mb-4">
     <%= f.text_field :name, class: "form-control", placeholder: t('event.name') %>
   </div>
+
   <div class="field mb-4">
     <%= f.text_field :description, class: "form-control", placeholder: t('event.description') %>
   </div>
+
   <%= render partial: 'layouts/error', locals: { model: event, attribute: :event_date} %>
   <div class="field mb-4">
     <%= f.datetime_field :event_date, class: "form-control", placeholder: 'Event date' %>
   </div>
+
   <%= render partial: 'layouts/error', locals: { model: event, attribute: :reminder_on} %>
   <div class="field mb-4">
     <%= f.datetime_field :reminder_on, class: "form-control", placeholder: 'Reminder on' %>
   </div>
+
+  <% if event.is_a?(Meeting) %>
+    <%= render partial: 'layouts/error', locals: { model: event, attribute: :start_time} %>
+    <div class="field mb-4">
+      <%= f.time_field :start_time, class: "form-control", placeholder: 'Start time' %>
+    </div>
+    <%= render partial: 'layouts/error', locals: { model: event, attribute: :end_time} %>
+    <div class="field mb-4">
+      <%= f.time_field :end_time, class: "form-control", placeholder: 'End time' %>
+    </div>
+  <% end %>
+
+  <% if event.is_a?(Notification) %>
+    <%= render partial: 'layouts/error', locals: { model: event, attribute: :notification_text} %>
+    <div class="field mb-4">
+      <%= f.text_area :notification_text, class: "form-control", placeholder: 'Notification text', rows: 3 %>
+    </div>
+  <% end %>
+
   <%= render partial: 'layouts/error', locals: { model: event, attribute: :category} %>
   <div class="field mb-4">
     <%= f.collection_select :category_id, current_user.categories, :id, :name,
                             { prompt: t('event.category'), selected: "", disabled: "" },
-                            { class: "form-control",
-                              placeholder: "Category select" } %>
+                            { class: "form-control", placeholder: "Category select" } %>
   </div>
+
   <p>
     <%= f.submit t('btn.create'), class: "btn btn-primary" %>
   </p>
