@@ -13,29 +13,25 @@ RSpec.describe EventReminderJob, type: :job do
   end
 
   describe 'sidekiq queue' do
-    subject(:job) { described_class.perform_async }
-
-    it 'adds job to queue' do
-      expect { job }.to change { Sidekiq::Queue.new('default').size }.by(1)
-    end
+    it_behaves_like 'push job to queue', 'default'
   end
 
   describe 'make update in event' do
-    before do
+    subject(:job_perform) do
       described_class.new.perform
       event.reload
     end
 
     it 'updates is_notified to true' do
-      expect(event.is_notified).to be true
+      expect { job_perform }.to(change(event, :is_notified).from(false).to(true))
     end
 
     it 'clears reminder_on' do
-      expect(event.reminder_on).to be_nil
+      expect { job_perform }.to(change(event, :reminder_on).from(event.reminder_on).to(nil))
     end
 
     it 'sends reminder email' do
-      expect(ActionMailer::Base.deliveries.count).to eq(1)
+      expect { job_perform }.to(change(ActionMailer::Base.deliveries, :count).from(0).to(1))
     end
   end
 end
