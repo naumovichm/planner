@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_05_083236) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_29_154158) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -25,10 +25,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_05_083236) do
     t.bigint "category_id", null: false
     t.datetime "created_at", null: false
     t.text "description"
+    t.time "end_time"
     t.datetime "event_date", null: false
-    t.boolean "is_notified", default: false
     t.string "name", null: false
+    t.text "notification_text"
     t.datetime "reminder_on"
+    t.text "reminder_status"
+    t.time "start_time"
+    t.string "type"
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.index ["category_id"], name: "index_events_on_category_id"
