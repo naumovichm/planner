@@ -6,8 +6,8 @@ RSpec.describe EventReminderJob, type: :job do
   let(:user) { create(:user) }
   let(:category) { create(:category) }
   let(:user_category) { create(:user_category, user: user, category: category) }
-  let!(:event) do
-    build(:event, user: user, category: category, reminder_on: 5.seconds.ago).tap do |e|
+  let!(:meeting) do
+    build(:meeting, user: user, category: category, reminder_on: 5.seconds.ago).tap do |e|
       e.save(validate: false)
     end
   end
@@ -19,15 +19,11 @@ RSpec.describe EventReminderJob, type: :job do
   describe 'make update in event' do
     subject(:job_perform) do
       described_class.new.perform
-      event.reload
+      meeting.reload
     end
 
-    it 'updates is_notified to true' do
-      expect { job_perform }.to(change(event, :is_notified).from(false).to(true))
-    end
-
-    it 'clears reminder_on' do
-      expect { job_perform }.to(change(event, :reminder_on).from(event.reminder_on).to(nil))
+    it 'updates reminder status is notified' do
+      expect { job_perform }.to(change(meeting, :reminder_status).from('pending').to('notified'))
     end
 
     it 'sends reminder email' do
