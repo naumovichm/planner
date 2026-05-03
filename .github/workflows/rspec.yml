@@ -1,0 +1,36 @@
+name: Rspec
+
+on:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  Rspec:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: admin
+          POSTGRES_PASSWORD: admin
+        ports:
+          - 5432:5432
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set timezone
+        run: sudo timedatectl set-timezone Europe/Minsk
+
+      - name: Build app
+        uses: ./.github/actions/prebuild_app
+
+      - name: Setup DB
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: 1234
+          POSTGRES_HOST: localhost
+        run: bundle exec rails db:setup
+
+      - name: Test DB
+        run: bundle exec rspec
