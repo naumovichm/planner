@@ -13,6 +13,6 @@ class EventReminderJob
 
   def send_reminder(event)
     EventMailer.reminder(user: event.user, event: event).deliver_now
-    event.update(is_notified: true, reminder_on: nil)
+    event.notify!
   end
 end

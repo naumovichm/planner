@@ -10,6 +10,13 @@ en:
             reminder_on: 
               past: "can't be in the past"
               too_late: "can't be equal or greater than event date"
+        meeting:
+          attributes:
+            start_time:
+              not_matched: "should be equal to event time"
+            end_time:
+              in_the_past: "must be after start time"
+
 
   time:
     formats:
@@ -106,6 +113,7 @@ en:
     weather: "Weather in this day"
     info: "Information is not available"
     no_events: "No Events"
+    select_type: "Here bitch"
 
   btn:
     add: "Add"
@@ -132,3 +140,5 @@ en:
     date: "Date: %{event_date}"
     thanks: "Thank you for using our service!"
     event_link: "Your event"
+    meeting_time: "Start at %{start} and end at %{end}"
+    notification_text: "Notification text %{text}"
