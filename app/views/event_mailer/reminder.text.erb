@@ -1,0 +1,5 @@
+<%= t('mailer.greetings', user: @user.first_name) %>
+<%= t('mailer.coming_event', event_name: @event.name) %>
+<%= t('mailer.date', event_date: l(@event.event_date, format: :default)) %>
+<%= t('mailer.event_link') %>: <%= @url %>
+<%= t('mailer.thanks') %>

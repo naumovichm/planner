@@ -16,6 +16,10 @@ jobs:
           POSTGRES_PASSWORD: admin
         ports:
           - 5432:5432
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
     steps:
       - uses: actions/checkout@v2
 
@@ -27,8 +31,8 @@ jobs:
 
       - name: Setup DB
         env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: 1234
+          POSTGRES_USER: admin
+          POSTGRES_PASSWORD: admin
           POSTGRES_HOST: localhost
         run: bundle exec rails db:setup
 
