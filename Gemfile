@@ -54,7 +54,7 @@ gem 'sass-rails'
 gem 'image_processing', '~> 1.2'
 
 # State Machine for Ruby Classes [https://github.com/aasm/aasm]
-gem 'aasm'
+gem 'aasm', '5.5.2'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
