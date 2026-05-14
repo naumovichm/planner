@@ -31,7 +31,7 @@ class Event < ApplicationRecord
     end
 
     event :notify do
-      transitions from: :pending, to: :notified
+      transitions from: :pending, to: :notified, after: -> { NotifierServices::EventNotifierService.new(event: self).call }
     end
   end
 

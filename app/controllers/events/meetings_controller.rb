@@ -47,7 +47,10 @@ module Events
     end
 
     def set_event
-      @meeting = current_user.events.find(params[:id])
+      @meeting = current_user.events.find_by(id: params[:id], type: 'Meeting')
+      return unless @meeting.nil?
+
+      render file: Rails.root.join('public/404.html'), status: :not_found
     end
   end
 end
