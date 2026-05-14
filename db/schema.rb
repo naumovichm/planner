@@ -10,9 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_29_154158) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_10_170047) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  # Custom types defined in this database.
+  # Note that some types may not work with other database engines. Be careful if changing database.
+  create_enum "reminder_status_type", ["no_reminder", "pending", "notified"]
 
   create_table "categories", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -30,7 +34,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_29_154158) do
     t.string "name", null: false
     t.text "notification_text"
     t.datetime "reminder_on"
-    t.text "reminder_status"
+    t.enum "reminder_status", default: "no_reminder", null: false, enum_type: "reminder_status_type"
     t.time "start_time"
     t.string "type"
     t.datetime "updated_at", null: false
