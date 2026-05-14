@@ -113,7 +113,6 @@ en:
     weather: "Weather in this day"
     info: "Information is not available"
     no_events: "No Events"
-    select_type: "Here bitch"
 
   btn:
     add: "Add"

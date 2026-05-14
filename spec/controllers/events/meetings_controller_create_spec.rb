@@ -4,20 +4,22 @@ require 'rails_helper'
 
 RSpec.describe Events::MeetingsController, type: :controller do
   describe 'POST /events/meetings/new' do
-    subject(:create_event) do
-      post :create,
-           params: { meeting: {
-             name: meeting.name,
-             event_date: meeting.event_date,
-             category_id: category.id,
-             start_time: meeting.start_time,
-             end_time: meeting.end_time
-           } }
-    end
+    subject(:create_event) { post :create, params: params }
 
     let(:user) { create(:user) }
     let(:meeting) { build(:meeting) }
     let(:category) { create(:category) }
+    let(:params) do
+      {
+        meeting: {
+          name: meeting.name,
+          event_date: meeting.event_date,
+          category_id: category.id,
+          start_time: meeting.start_time,
+          end_time: meeting.end_time
+        }
+      }
+    end
 
     describe 'when user is authenticated' do
       before { sign_in(user) }

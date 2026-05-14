@@ -74,7 +74,7 @@ RSpec.describe Event, type: :model do
   end
 
   describe 'aasm' do
-    let(:event_with_reminder) { create(:event, :with_reminder) }
+    let(:event_with_reminder) { create(:meeting, :with_reminder) }
 
     describe 'initial state when no reminder' do
       it { expect(event.reminder_status).to eq 'no_reminder' }

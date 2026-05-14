@@ -4,19 +4,21 @@ require 'rails_helper'
 
 RSpec.describe Events::NotificationsController, type: :controller do
   describe 'POST /events/new' do
-    subject(:create_event) do
-      post :create,
-           params: { notification: {
-             name: notification.name,
-             event_date: DateTime.now.tomorrow,
-             notification_text: notification.notification_text,
-             category_id: category.id
-           } }
-    end
+    subject(:create_event) { post :create, params: params }
 
     let(:user) { create(:user) }
     let(:notification) { build(:notification) }
     let(:category) { create(:category) }
+    let(:params) do
+      {
+        notification: {
+          name: notification.name,
+          event_date: DateTime.now.tomorrow,
+          notification_text: notification.notification_text,
+          category_id: category.id
+        }
+      }
+    end
 
     describe 'when user is authenticated' do
       before { sign_in(user) }

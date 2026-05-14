@@ -16,13 +16,15 @@ RSpec.describe Meeting, type: :model do
     end
 
     describe 'start_time does not match to time of event_date' do
-      let(:meeting_with_invalid_start_time) { build(:meeting, :with_invalid_start_time) }
+      let(:meeting_with_invalid_start_time) { build(:meeting, event_date: DateTime.tomorrow, start_time: '23:00') }
 
       it { expect(meeting_with_invalid_start_time).not_to be_valid }
     end
 
     describe 'end_time less than start_time' do
-      let(:meeting_with_invalid_end_time) { build(:meeting, :with_invalid_end_time) }
+      let(:meeting_with_invalid_end_time) do
+        build(:meeting, event_date: DateTime.tomorrow + 1.hour, start_time: '01:00', end_time: '00:30')
+      end
 
       it { expect(meeting_with_invalid_end_time).not_to be_valid }
     end
