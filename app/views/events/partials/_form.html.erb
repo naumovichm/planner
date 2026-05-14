@@ -18,23 +18,7 @@
     <%= f.datetime_field :reminder_on, class: "form-control", placeholder: 'Reminder on' %>
   </div>
 
-  <% if event.is_a?(Meeting) %>
-    <%= render partial: 'layouts/error', locals: { model: event, attribute: :start_time} %>
-    <div class="field mb-4">
-      <%= f.time_field :start_time, class: "form-control", placeholder: 'Start time' %>
-    </div>
-    <%= render partial: 'layouts/error', locals: { model: event, attribute: :end_time} %>
-    <div class="field mb-4">
-      <%= f.time_field :end_time, class: "form-control", placeholder: 'End time' %>
-    </div>
-  <% end %>
-
-  <% if event.is_a?(Notification) %>
-    <%= render partial: 'layouts/error', locals: { model: event, attribute: :notification_text} %>
-    <div class="field mb-4">
-      <%= f.text_area :notification_text, class: "form-control", placeholder: 'Notification text', rows: 3 %>
-    </div>
-  <% end %>
+  <%= form_fields_type(f, event) %>
 
   <%= render partial: 'layouts/error', locals: { model: event, attribute: :category} %>
   <div class="field mb-4">

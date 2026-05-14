@@ -1,0 +1,8 @@
+<%= render partial: 'layouts/error', locals: { model: event, attribute: :start_time} %>
+<div class="field mb-4">
+  <%= f.time_field :start_time, class: "form-control", placeholder: 'Start time' %>
+</div>
+<%= render partial: 'layouts/error', locals: { model: event, attribute: :end_time} %>
+<div class="field mb-4">
+  <%= f.time_field :end_time, class: "form-control", placeholder: 'End time' %>
+</div>
