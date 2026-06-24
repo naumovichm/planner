@@ -2,18 +2,14 @@
 
 class Meeting < Event
   validates :start_time, :end_time, presence: true
-  validate :start_time_and_end_time_validy
+  validates :end_time, comparison: { greater_than: :start_time }, if: -> { start_time.present? }
   validate :event_date_time_matches_start_time
 
-  private
-
-  def start_time_and_end_time_validy
-    return if start_time.blank? || end_time.blank?
-
-    return unless end_time <= start_time
-
-    errors.add(:end_time, :in_the_past)
+  def display_reminder
+    I18n.t('mailer.meeting_time', start: start_time.strftime('%H:%M'), end: end_time.strftime('%H:%M'))
   end
+
+  private
 
   def event_date_time_matches_start_time
     return if event_date.blank? || start_time.blank?

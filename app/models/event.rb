@@ -37,6 +37,8 @@ class Event < ApplicationRecord
 
   before_save :set_reminder_status, if: :reminder_on_changed?
 
+  def display_reminder; end
+
   private
 
   def reminder_date_validity

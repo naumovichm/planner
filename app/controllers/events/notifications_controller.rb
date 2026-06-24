@@ -47,10 +47,7 @@ module Events
     end
 
     def set_event
-      @notification = current_user.events.find_by(id: params[:id], type: 'Notification')
-      return unless @notification.nil?
-
-      render file: Rails.root.join('public/404.html'), status: :not_found
+      @notification = current_user.notifications.find(params[:id])
     end
   end
 end

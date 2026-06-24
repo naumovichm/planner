@@ -12,4 +12,6 @@ class User < ApplicationRecord
   has_many :events, dependent: :destroy
   has_many :user_categories, dependent: :destroy
   has_many :categories, through: :user_categories
+  has_many :meetings, -> { where(type: 'Meeting') }, inverse_of: :user, dependent: :destroy
+  has_many :notifications, -> { where(type: 'Notification') }, inverse_of: :user, dependent: :destroy
 end
