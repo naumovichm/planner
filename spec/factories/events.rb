@@ -6,6 +6,7 @@ FactoryBot.define do
     event_date { Faker::Time.forward(days: 1, period: :day) }
     category { association :category }
     user { association :user }
+    type { 'Event' }
   end
 
   trait :with_description do

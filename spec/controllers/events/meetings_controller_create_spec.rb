@@ -24,18 +24,45 @@ RSpec.describe Events::MeetingsController, type: :controller do
     describe 'when user is authenticated' do
       before { sign_in(user) }
 
-      it 'save event in the database' do
-        expect { create_event }.to change(Meeting, :count).from(0).to(1)
+      context 'when params are valid' do
+        it 'save event in the database' do
+          expect { create_event }.to change(Meeting, :count).by(1)
+        end
+
+        it 'redirect to events_path' do
+          create_event
+          expect(response).to redirect_to(events_path)
+        end
+
+        it 'set a flash message' do
+          create_event
+          expect(flash[:notice]).to eq('Event successfully created')
+        end
       end
 
-      it 'redirect to events_path' do
-        create_event
-        expect(response).to redirect_to(events_path)
-      end
+      context 'when params are invalid' do
+        subject(:create_invalid_meeting) { post :create, params: invalid_params }
 
-      it 'set a flash message' do
-        create_event
-        expect(flash[:notice]).to eq('Event successfully created')
+        let(:invalid_params) do
+          {
+            meeting: {
+              name: '',
+              event_date: meeting.event_date,
+              category_id: category.id,
+              start_time: meeting.start_time,
+              end_time: meeting.end_time
+            }
+          }
+        end
+
+        it 'does not save event in the database' do
+          expect { create_invalid_meeting }.not_to change(Meeting, :count)
+        end
+
+        it 'set a error message' do
+          create_invalid_meeting
+          expect(assigns(:meeting).errors[:name]).to include("can't be blank")
+        end
       end
     end
 
@@ -51,7 +78,7 @@ RSpec.describe Events::MeetingsController, type: :controller do
       end
 
       it 'not save event in the database' do
-        expect { create_event }.not_to change(Meeting, :count).from(0)
+        expect { create_event }.not_to change(Meeting, :count)
       end
     end
   end

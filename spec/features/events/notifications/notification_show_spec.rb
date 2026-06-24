@@ -5,6 +5,7 @@ require 'rails_helper'
 RSpec.describe 'Notification#show', type: :feature do
   describe 'show event' do
     let(:user) { create(:user) }
+    let(:notification) { create(:notification, user: user) }
 
     describe 'when user is authenticated' do
       before do
