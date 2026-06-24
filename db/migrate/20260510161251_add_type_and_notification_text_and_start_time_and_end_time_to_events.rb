@@ -9,8 +9,9 @@ class AddTypeAndNotificationTextAndStartTimeAndEndTimeToEvents < ActiveRecord::M
       t.text :notification_text
     end
 
-    Event.where(type: nil).find_each do |event|
-      event.update(type: 'Notification', notification_text: 'Backfill for validation')
-    end
+    Event.where(type: nil).update_all(
+      type: 'Notification',
+      notification_text: 'Backfill for validation'
+    )
   end
 end
