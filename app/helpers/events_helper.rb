@@ -10,8 +10,4 @@ module EventsHelper
   def calc_event_num(page, per_page, index)
     (page - 1) * per_page + index + 1
   end
-
-  def form_fields_type(form, event)
-    render partial: "events/partials/form_fields/#{event.type.underscore}", locals: { f: form, event: event }
-  end
 end

@@ -15,8 +15,7 @@ en:
             start_time:
               not_matched: "should be equal to event time"
             end_time:
-              in_the_past: "must be after start time"
-
+              greater_than: "must be after start time"
 
   time:
     formats:

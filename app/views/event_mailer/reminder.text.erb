@@ -1,10 +1,6 @@
 <%= t('mailer.greetings', user: @user.first_name) %>
 <%= t('mailer.coming_event', event_name: @event.name) %>
 <%= t('mailer.date', event_date: l(@event.event_date, format: :default)) %>
-<% if @event.is_a?(Meeting) %>
-  <%= t('mailer.meeting_time', start: @event.start_time.strftime("%H:%M"), end: @event.end_time.strftime("%H:%M")) %>
-<% elsif @event.is_a?(Notification) %>
-  <%= t('mailer.notification_text', text: @event.notification_text) %>
-<% end %>
+<%= @event.display_reminder %>
 <%= t('mailer.event_link') %>: <%= @url %>
 <%= t('mailer.thanks') %>

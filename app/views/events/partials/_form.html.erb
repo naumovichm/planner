@@ -18,7 +18,7 @@
     <%= f.datetime_field :reminder_on, class: "form-control", placeholder: 'Reminder on' %>
   </div>
 
-  <%= form_fields_type(f, event) %>
+  <%= render partial: "events/partials/form_fields/#{event.type.underscore}", locals: { f: f, event: event } %>
 
   <%= render partial: 'layouts/error', locals: { model: event, attribute: :category} %>
   <div class="field mb-4">

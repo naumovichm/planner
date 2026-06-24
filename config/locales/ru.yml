@@ -41,7 +41,7 @@ ru:
               not_matched: "начало времени должно быть равно времени события"
             end_time:
               blank: "не может быть пустой"
-              in_the_past: "время окончания не может быть меньше времени начала"
+              greater_than: "время окончания не может быть меньше времени начала"
         notification:
           attributes:
             notification_text:
