@@ -3,9 +3,10 @@
 FactoryBot.define do
   factory :event do
     name { Faker::Lorem.word }
-    event_date { Faker::Date.between(from: DateTime.now.tomorrow, to: 1.year.from_now) }
+    event_date { Faker::Time.forward(days: 1, period: :day) }
     category { association :category }
     user { association :user }
+    type { 'Event' }
   end
 
   trait :with_description do

@@ -72,4 +72,30 @@ RSpec.describe Event, type: :model do
       it { expect(described_class.today).to contain_exactly(today_event) }
     end
   end
+
+  describe 'aasm' do
+    let(:event_with_reminder) { create(:meeting, :with_reminder) }
+
+    describe 'initial state when no reminder' do
+      it { expect(event.reminder_status).to eq 'no_reminder' }
+    end
+
+    describe 'when reminder is present' do
+      it { expect(event_with_reminder.reminder_status).to eq 'pending' }
+    end
+
+    describe 'when reminder_status changes from no_reminder to pending' do
+      before { event.reminder_on = event.event_date - 1.hour }
+
+      it { expect { event.save }.to change(event, :reminder_status).from('no_reminder').to('pending') }
+    end
+
+    describe 'when reminder_status changes from pending to notified' do
+      it {
+        expect do
+          event_with_reminder.notify!
+        end.to change(event_with_reminder, :reminder_status).from('pending').to('notified')
+      }
+    end
+  end
 end

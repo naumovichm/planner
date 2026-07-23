@@ -5,14 +5,9 @@ class EventReminderJob
 
   def perform
     Event.for_notifications.includes(:user).find_each do |event|
-      send_reminder(event)
+      event.notify!
+    rescue StandardError => e
+      Rails.logger.error "Notification with id #{event.id} failed with #{e.message}"
     end
-  end
-
-  private
-
-  def send_reminder(event)
-    EventMailer.reminder(user: event.user, event: event).deliver_now
-    event.update(is_notified: true, reminder_on: nil)
   end
 end

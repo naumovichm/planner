@@ -19,3 +19,10 @@ Metrics/BlockLength:
 Rails/NotNullColumn:
   Exclude:
     - 'db/migrate/20260404093457_add_first_name_last_name_to_users.rb'
+
+RSpec/NestedGroups:
+  Enabled: false
+
+Rails/SkipsModelValidations:
+  Exclude:
+    - 'db/migrate/*.rb'

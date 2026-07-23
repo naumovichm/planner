@@ -10,6 +10,12 @@ en:
             reminder_on: 
               past: "can't be in the past"
               too_late: "can't be equal or greater than event date"
+        meeting:
+          attributes:
+            start_time:
+              not_matched: "should be equal to event time"
+            end_time:
+              greater_than: "must be after start time"
 
   time:
     formats:
@@ -132,3 +138,5 @@ en:
     date: "Date: %{event_date}"
     thanks: "Thank you for using our service!"
     event_link: "Your event"
+    meeting_time: "Start at %{start} and end at %{end}"
+    notification_text: "Notification text %{text}"

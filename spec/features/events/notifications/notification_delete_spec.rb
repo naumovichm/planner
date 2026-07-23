@@ -2,15 +2,15 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Events#delete', type: :feature do
+RSpec.describe 'Notification#delete', type: :feature do
   describe 'delete event' do
     let(:user) { create(:user) }
+    let(:notification) { create(:notification, user: user) }
 
     describe 'when user is authenticated' do
       before do
         login_as(user)
-        create(:event, user:)
-        visit event_path(Event.first.id, locale: I18n.locale)
+        visit events_notification_path(notification.id, locale: I18n.locale)
         click_button 'Delete'
       end
 
@@ -19,8 +19,7 @@ RSpec.describe 'Events#delete', type: :feature do
 
     describe 'when user is not authenticated' do
       before do
-        create(:event, user:)
-        visit event_path(Event.first.id, locale: I18n.locale)
+        visit events_notification_path(notification.id, locale: I18n.locale)
       end
 
       it { expect(page).to have_no_content('Event successfully deleted') }

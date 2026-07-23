@@ -16,7 +16,7 @@ RSpec.describe 'Event#index', type: :feature do
       end
 
       it { expect(page).to have_content('Events') }
-      it { expect(page).to have_link('Add') }
+      it { expect(page).to have_button('Create event') }
 
       it 'include user events' do
         events.each do |event|

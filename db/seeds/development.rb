@@ -11,12 +11,27 @@ users = 5.times.map do |index|
 end
 
 100.times do
-  Event.create!(
+  event_type = %w[Meeting Notification].sample
+  event_date = Faker::Date.between(from: DateTime.now.tomorrow, to: 1.year.from_now)
+
+  common_params = {
     name: Faker::Lorem.word,
-    event_date: Faker::Date.between(from: DateTime.now.tomorrow, to: 1.year.from_now),
+    event_date: event_date,
     category: default_categories.sample,
     user: users.sample
-  )
+  }
+
+  case event_type
+  when 'Meeting'
+    Meeting.create!(common_params.merge(
+                      start_time: event_date.strftime('%H:%M'),
+                      end_time: (event_date + 1.hour).strftime('%H:%M')
+                    ))
+  when 'Notification'
+    Notification.create!(common_params.merge(
+                           notification_text: Faker::Lorem.sentence
+                         ))
+  end
 end
 
 users.each do |user|

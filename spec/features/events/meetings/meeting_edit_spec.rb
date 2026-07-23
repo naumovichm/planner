@@ -6,13 +6,13 @@ RSpec.describe 'Event#edit', type: :feature do
   let(:user) { create(:user) }
   let!(:category) { create(:category) }
 
-  let!(:event) { create(:event, user:, category:) }
+  let!(:meeting) { create(:meeting, user:, category:) }
 
   describe 'when user is authenticated' do
     before do
       create(:user_category, user:, category:)
       login_as(user)
-      visit edit_event_path(event.id, locale: I18n.locale)
+      visit edit_events_meeting_path(meeting.id, locale: I18n.locale)
     end
 
     describe 'edit event' do
@@ -41,6 +41,24 @@ RSpec.describe 'Event#edit', type: :feature do
       end
 
       it { expect(page).to have_content("Event date can't be blank") }
+    end
+
+    describe 'when start time is empty' do
+      before do
+        fill_in 'Start time', with: nil
+        click_button 'Create'
+      end
+
+      it { expect(page).to have_content("Start time can't be blank") }
+    end
+
+    describe 'when end time is empty' do
+      before do
+        fill_in 'End time', with: nil
+        click_button 'Create'
+      end
+
+      it { expect(page).to have_content("End time can't be blank") }
     end
 
     describe 'when event date is in the past' do
@@ -85,7 +103,7 @@ RSpec.describe 'Event#edit', type: :feature do
   describe 'when user is not authenticated' do
     before do
       create(:user_category, user:, category:)
-      visit edit_event_path(event.id, locale: I18n.locale)
+      visit edit_events_meeting_path(meeting.id, locale: I18n.locale)
     end
 
     it { expect(page).to have_no_content('Event successfully updated') }

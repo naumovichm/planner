@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row ">
+    <div class="col-sm-6 p-4">
+      <h2><%= @meeting.name %></h2>
+      <p><%= @meeting.description %></p>
+      <div class="d-flex align-items-center mb-4">
+        <i class="me-auto"><%= l(@meeting.event_date, format: :default) %></i>
+        <b><%= @meeting.category.name %></b>
+      </div>
+      <% if @meeting.reminder_on %>
+        <div class="mb-4">
+          <%= t('event.reminder') %><%= l(@meeting.reminder_on, format: :default) %>
+        </div>
+      <% end %>
+      <div class="mb-4">
+        <%= t('meeting.start_at') %>: <%= @meeting.start_time.strftime("%H:%M") %> |
+        <%= t('meeting.end_at') %>: <%= @meeting.end_time.strftime("%H:%M") %>
+      </div>
+      <div class="col-sm-6 btns d-flex align-items-center">
+        <% if @meeting.valid? %>
+          <%= link_to t('btn.edit'), edit_events_meeting_path(@meeting.id, locale: I18n.locale),
+           class: "btn btn-primary me-auto px-4" %>
+        <% end %>
+        <%= button_to t('btn.delete'), events_meeting_path(@meeting.id, locale: I18n.locale),
+           method: :delete, class: "btn btn-danger" %>
+      </div>
+    </div>
+  </div>
+</div>

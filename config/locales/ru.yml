@@ -34,6 +34,18 @@ ru:
             reminder_on: 
               past: "не может быть в прошлом"
               too_late: "не может быть равной или больше даты события"
+        meeting:
+          attributes:
+            start_time:
+              blank: "не может быть пустой"
+              not_matched: "начало времени должно быть равно времени события"
+            end_time:
+              blank: "не может быть пустой"
+              greater_than: "время окончания не может быть меньше времени начала"
+        notification:
+          attributes:
+            notification_text:
+              blank: "не может быть пустой"
 
   time:
     formats:

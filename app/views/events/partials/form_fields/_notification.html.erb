@@ -1,0 +1,4 @@
+<%= render partial: 'layouts/error', locals: { model: event, attribute: :notification_text} %>
+<div class="field mb-4">
+  <%= f.text_area :notification_text, class: "form-control", placeholder: 'Notification text', rows: 3 %>
+</div>
