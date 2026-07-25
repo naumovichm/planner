@@ -16,4 +16,20 @@ class User < ApplicationRecord
   has_many :categories, through: :user_categories
   has_many :meetings, -> { where(type: 'Meeting') }, inverse_of: :user, dependent: :destroy
   has_many :notifications, -> { where(type: 'Notification') }, inverse_of: :user, dependent: :destroy
+
+  before_validation :assign_default_role, on: :create
+
+  def common?
+    role.name == 'common'
+  end
+
+  def admin?
+    role.name == 'admin'
+  end
+
+  private
+
+  def assign_default_role
+    self.role ||= Role.find_by(name: 'common')
+  end
 end

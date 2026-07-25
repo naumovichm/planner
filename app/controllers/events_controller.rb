@@ -5,7 +5,7 @@ class EventsController < ApplicationController
   def index
     @events = EventsServices::SearchEventsService.new(
       search_params:,
-      user: current_user
+      user_events: policy_scope(Event)
     ).call.page(params[:page]).per(params[:per_page])
   end
 

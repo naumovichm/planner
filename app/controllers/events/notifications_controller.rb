@@ -4,7 +4,6 @@ module Events
   class NotificationsController < ApplicationController
     before_action :authenticate_user!
     before_action :set_event, only: %i[show edit update destroy]
-
     def show; end
 
     def new
@@ -47,7 +46,8 @@ module Events
     end
 
     def set_event
-      @notification = current_user.notifications.find(params[:id])
+      @notification = Notification.find(params[:id])
+      authorize @notification
     end
   end
 end
