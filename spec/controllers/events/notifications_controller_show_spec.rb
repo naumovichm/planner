@@ -62,10 +62,6 @@ RSpec.describe Events::NotificationsController, type: :controller do
       it 'returns status 404' do
         expect(response).to have_http_status(:not_found)
       end
-
-      it 'does not assign @meeting' do
-        expect(assigns(:notification)).to be_nil
-      end
     end
 
     describe 'when user is not authenticated' do

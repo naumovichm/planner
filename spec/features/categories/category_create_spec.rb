@@ -3,13 +3,13 @@
 require 'rails_helper'
 
 RSpec.describe 'Category create', type: :feature do
-  let(:user) { create(:user) }
+  let(:admin) { create(:user, :admin) }
 
-  describe 'when user is authenticated' do
+  describe 'when admin is authenticated' do
     let(:category) { build(:category) }
 
     before do
-      login_as(user)
+      login_as(admin)
       visit new_category_path
     end
 
@@ -26,7 +26,7 @@ RSpec.describe 'Category create', type: :feature do
 
     describe 'name of category has already been taken' do
       before do
-        create(:user_category, user:, category: category)
+        create(:user_category, user: admin, category: category)
         fill_in 'Name', with: category.name
         click_button 'Create'
       end

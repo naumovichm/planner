@@ -5,12 +5,25 @@ require 'rails_helper'
 RSpec.describe 'Category categories', type: :feature do
   describe 'categories category' do
     let(:user) { create(:user) }
+    let(:admin) { create(:user, :admin) }
     let(:category) { create(:category) }
 
     describe 'when user is authenticated' do
       before do
         create(:user_category, user:, category: category)
         login_as(user)
+        visit categories_path
+      end
+
+      describe 'error 404' do
+        it { expect(page).to have_css('#error-id') }
+      end
+    end
+
+    describe 'when admin is authenticated' do
+      before do
+        create(:user_category, user: admin, category: category)
+        login_as(admin)
         visit categories_path
       end
 

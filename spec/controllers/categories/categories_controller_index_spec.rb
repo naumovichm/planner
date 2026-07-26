@@ -4,6 +4,7 @@ require 'rails_helper'
 
 RSpec.describe CategoriesController, type: :controller do
   let(:user) { create(:user) }
+  let(:admin) { create(:user, :admin) }
 
   describe 'GET #index' do
     let(:category) { create(:category) }
@@ -14,6 +15,18 @@ RSpec.describe CategoriesController, type: :controller do
       before do
         create(:user_category, user:, category: category)
         sign_in(user)
+        get :index
+      end
+
+      it 'returns status 404' do
+        expect(response).to have_http_status(:not_found)
+      end
+    end
+
+    describe 'when admin is authenticated' do
+      before do
+        create(:user_category, user: admin, category: category)
+        sign_in(admin)
         get :index
       end
 

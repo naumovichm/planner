@@ -7,10 +7,24 @@ RSpec.describe CategoriesController, type: :controller do
     subject(:create_category) { post :create, params: { category: { name: category.name } } }
 
     let(:user) { create(:user) }
+    let(:admin) { create(:user, :admin) }
     let(:category) { build(:category) }
 
     describe 'when user is authenticated' do
       before { sign_in(user) }
+
+      it 'returns status 404' do
+        create_category
+        expect(response).to have_http_status(:not_found)
+      end
+
+      it 'not save category in the database' do
+        expect { create_category }.not_to change(Category, :count)
+      end
+    end
+
+    describe 'when admin is authenticated' do
+      before { sign_in(admin) }
 
       it 'redirect to categories_path' do
         create_category
@@ -23,7 +37,7 @@ RSpec.describe CategoriesController, type: :controller do
       end
 
       it 'when save category in the database' do
-        expect { create_category }.to change(Category, :count).from(0).to(1)
+        expect { create_category }.to change(Category, :count).by(1)
       end
     end
 
@@ -39,7 +53,7 @@ RSpec.describe CategoriesController, type: :controller do
       end
 
       it 'not save category in the database' do
-        expect { create_category }.not_to change(Category, :count).from(0)
+        expect { create_category }.not_to change(Category, :count)
       end
     end
   end
