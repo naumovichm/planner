@@ -49,7 +49,7 @@ RSpec.describe Events::NotificationsController, type: :controller do
 
       it 'returns status 404' do
         delete_event
-        expect(response).to have_http_status(:not_found)
+        expect(response).to have_http_status(:forbidden)
       end
 
       it 'does not delete the notification' do

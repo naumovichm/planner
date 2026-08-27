@@ -19,7 +19,7 @@ RSpec.describe CategoriesController, type: :controller do
       end
 
       it 'returns status 404' do
-        expect(response).to have_http_status(:not_found)
+        expect(response).to have_http_status(:forbidden)
       end
     end
 

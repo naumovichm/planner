@@ -15,7 +15,7 @@ RSpec.describe CategoriesController, type: :controller do
 
       it 'returns status 404' do
         create_category
-        expect(response).to have_http_status(:not_found)
+        expect(response).to have_http_status(:forbidden)
       end
 
       it 'not save category in the database' do

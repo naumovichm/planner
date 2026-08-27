@@ -15,8 +15,8 @@ RSpec.describe 'Category categories', type: :feature do
         visit categories_path
       end
 
-      describe 'error 404' do
-        it { expect(page).to have_css('#error-id') }
+      describe 'error 403' do
+        it { expect(page.status_code).to eq(403) }
       end
     end
 

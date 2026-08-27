@@ -2,6 +2,16 @@
 
 FactoryBot.define do
   factory :role do
-    name { Faker::Lorem.word }
+    initialize_with { Role.find_or_create_by(name: name) }
+
+    name { 'common' }
+
+    trait :common do
+      name { 'common' }
+    end
+
+    trait :admin do
+      name { 'admin' }
+    end
   end
 end

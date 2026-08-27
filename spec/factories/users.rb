@@ -5,10 +5,10 @@ FactoryBot.define do
     first_name { Faker::Name.first_name }
     email { Faker::Internet.email }
     password { Faker::Internet.password }
-    role { Role.find_or_create_by(name: 'common') }
+    role { create(:role, :common) }
 
     trait :admin do
-      role { Role.find_or_create_by(name: 'admin') }
+      role { create(:role, :admin) }
     end
   end
 end
