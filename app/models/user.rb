@@ -19,17 +19,13 @@ class User < ApplicationRecord
 
   before_validation :assign_default_role, on: :create
 
-  def common?
-    role.name == 'common'
-  end
+  delegate :common?, to: :role
 
-  def admin?
-    role.name == 'admin'
-  end
+  delegate :admin?, to: :role
 
   private
 
   def assign_default_role
-    self.role ||= Role.find_by(name: 'common')
+    self.role ||= Role.common.first
   end
 end

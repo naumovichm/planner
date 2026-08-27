@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class Role < ApplicationRecord
-  validates :name, presence: true, uniqueness: { case_sensitive: false }
+  enum :name, { common: 'common', admin: 'admin' }
+  validates :name, presence: true, uniqueness: true
 
-  has_many :users, dependent: :destroy
+  has_many :users, dependent: :nullify
 end
