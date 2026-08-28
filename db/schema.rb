@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_20_165225) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_27_052138) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
   # Custom types defined in this database.
   # Note that some types may not work with other database engines. Be careful if changing database.
   create_enum "reminder_status_type", ["no_reminder", "pending", "notified"]
+  create_enum "role_name", ["common", "admin"]
 
   create_table "categories", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -46,6 +47,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_20_165225) do
     t.index ["user_id"], name: "index_events_on_user_id"
   end
 
+  create_table "roles", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.enum "name", null: false, enum_type: "role_name"
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_roles_on_name", unique: true
+  end
+
   create_table "user_categories", force: :cascade do |t|
     t.bigint "category_id", null: false
     t.datetime "created_at", null: false
@@ -65,13 +73,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_20_165225) do
     t.datetime "remember_created_at"
     t.datetime "reset_password_sent_at"
     t.string "reset_password_token"
+    t.bigint "role_id", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["role_id"], name: "index_users_on_role_id"
   end
 
   add_foreign_key "events", "categories", on_delete: :cascade
   add_foreign_key "events", "users", on_delete: :cascade
   add_foreign_key "user_categories", "categories", on_delete: :cascade
   add_foreign_key "user_categories", "users", on_delete: :cascade
+  add_foreign_key "users", "roles"
 end

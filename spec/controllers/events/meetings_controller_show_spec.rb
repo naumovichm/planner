@@ -54,11 +54,7 @@ RSpec.describe Events::MeetingsController, type: :controller do
       end
 
       it 'returns status 404' do
-        expect(response).to have_http_status(:not_found)
-      end
-
-      it 'does not assign @meeting' do
-        expect(assigns(:meeting)).to be_nil
+        expect(response).to have_http_status(:forbidden)
       end
     end
 

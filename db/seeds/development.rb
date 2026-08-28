@@ -2,11 +2,21 @@
 
 default_categories = %w[Personal Work Vacation].map { |category| Category.find_or_create_by!(name: category) }
 
+default_roles = %w[common admin].map { |role| Role.find_or_create_by!(name: role) }
+
+User.find_or_create_by!(email: 'admin@example.com') do |user|
+  user.first_name = Faker::Name.first_name
+  user.last_name = Faker::Name.last_name
+  user.password = 'password'
+  user.role = default_roles[1]
+end
+
 users = 5.times.map do |index|
   User.find_or_create_by!(email: "user_#{index}@example.com") do |user|
     user.first_name = Faker::Name.first_name
     user.last_name = Faker::Name.last_name
     user.password = 'password'
+    user.role = default_roles[0]
   end
 end
 

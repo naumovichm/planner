@@ -3,6 +3,7 @@
 class CategoriesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_category, only: %i[show edit update destroy]
+  before_action :authorize_admin_for_category!
   def index
     @categories = current_user.categories.page(params[:page]).per(params[:per_page])
   end
@@ -50,5 +51,9 @@ class CategoriesController < ApplicationController
 
   def set_category
     @category = current_user.categories.find(params[:id])
+  end
+
+  def authorize_admin_for_category!
+    authorize Category
   end
 end

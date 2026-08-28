@@ -4,6 +4,7 @@ require 'rails_helper'
 
 RSpec.describe CategoriesController, type: :controller do
   let(:user) { create(:user) }
+  let(:admin) { create(:user, :admin) }
 
   describe 'DELETE /categories/:id' do
     subject(:delete_category) { delete :destroy, params: { id: category.id } }
@@ -16,8 +17,24 @@ RSpec.describe CategoriesController, type: :controller do
         sign_in(user)
       end
 
+      it 'returns status 404' do
+        delete_category
+        expect(response).to have_http_status(:forbidden)
+      end
+
       it 'delete category in the database' do
-        expect { delete_category }.to change(Category, :count).from(1).to(0)
+        expect { delete_category }.not_to change(Category, :count)
+      end
+    end
+
+    describe 'when admin is authenticated delete category' do
+      before do
+        admin.categories.push(category)
+        sign_in(admin)
+      end
+
+      it 'delete category in the database' do
+        expect { delete_category }.to change(Category, :count).by(-1)
       end
 
       it 'sets a flash notice message' do
@@ -43,7 +60,7 @@ RSpec.describe CategoriesController, type: :controller do
       end
 
       it 'not delete category in the database' do
-        expect { delete_category }.not_to change(Category, :count).from(1)
+        expect { delete_category }.not_to change(Category, :count)
       end
     end
   end

@@ -4,6 +4,7 @@ require 'rails_helper'
 
 RSpec.describe CategoriesController, type: :controller do
   let(:user) { create(:user) }
+  let(:admin) { create(:user, :admin) }
 
   describe 'GET /category/:id' do
     subject(:show_category) { get :show, params: { id: category.id } }
@@ -14,6 +15,18 @@ RSpec.describe CategoriesController, type: :controller do
       before do
         user.categories << category
         sign_in(user)
+        show_category
+      end
+
+      it 'returns status 404' do
+        expect(response).to have_http_status(:forbidden)
+      end
+    end
+
+    describe 'when admin is authenticated' do
+      before do
+        admin.categories << category
+        sign_in(admin)
         show_category
       end
 

@@ -4,7 +4,6 @@ module Events
   class MeetingsController < ApplicationController
     before_action :authenticate_user!
     before_action :set_event, only: %i[show edit update destroy]
-
     def show; end
 
     def new
@@ -47,7 +46,8 @@ module Events
     end
 
     def set_event
-      @meeting = current_user.meetings.find(params[:id])
+      @meeting = Meeting.find(params[:id])
+      authorize @meeting
     end
   end
 end

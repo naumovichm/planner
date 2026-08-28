@@ -4,6 +4,7 @@ require 'rails_helper'
 
 RSpec.describe CategoriesController, type: :controller do
   let(:user) { create(:user) }
+  let(:admin) { create(:user, :admin) }
 
   describe 'PATCH /category/:id' do
     subject(:edit_category) { patch :update, params: { id: category.id, category: { name: 'NewName' } } }
@@ -13,7 +14,19 @@ RSpec.describe CategoriesController, type: :controller do
     describe 'when user is authenticated' do
       before do
         create(:user_category, user:, category:)
-        sign_in(user)
+        sign_in(admin)
+        edit_category
+      end
+
+      it 'returns status 404' do
+        expect(response).to have_http_status(:not_found)
+      end
+    end
+
+    describe 'when admin is authenticated' do
+      before do
+        create(:user_category, user: admin, category:)
+        sign_in(admin)
         edit_category
       end
 

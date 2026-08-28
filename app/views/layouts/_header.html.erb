@@ -12,9 +12,12 @@
           <li class="nav-item">
             <%= link_to t('nav.events'), events_path, class: "nav-link" %>
           </li>
-          <li class="nav-item">
-            <%= link_to t('nav.categories'), categories_path, class: "nav-link" %>
-          </li>
+          <% if current_user.admin? %>
+            <% p current_user %>
+            <li class="nav-item">
+              <%= link_to t('nav.categories'), categories_path, class: "nav-link" %>
+            </li>
+          <% end %>
         </ul>
       </div>
       <%= render partial: 'users/partials/user_dropdown' %>

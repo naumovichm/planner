@@ -19,20 +19,20 @@ describe 'CategoryMethods' do
     end
   end
 
-  describe '.belongs_to_many_users?' do
+  describe '.belongs_to_many_users? only for admin' do
     let(:category) { create(:category) }
-    let(:user_one) { create(:user) }
-    let(:user_two) { create(:user) }
+    let(:admin_one) { create(:user, :admin) }
+    let(:admin_two) { create(:user, :admin) }
 
     it 'category belongs to many users' do
-      user_one.categories.push(category)
-      user_two.categories.push(category)
+      admin_one.categories.push(category)
+      admin_two.categories.push(category)
 
       expect(category.belongs_to_many_users?).to be true
     end
 
     it 'category belongs to one user' do
-      user_one.categories.push(category)
+      admin_one.categories.push(category)
 
       expect(category.belongs_to_many_users?).to be false
     end

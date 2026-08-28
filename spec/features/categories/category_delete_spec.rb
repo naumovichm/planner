@@ -5,6 +5,7 @@ require 'rails_helper'
 RSpec.describe 'Category delete', type: :feature do
   describe 'delete category' do
     let(:user) { create(:user) }
+    let(:admin) { create(:user, :admin) }
 
     describe 'when user is authenticated' do
       let(:category) { create(:category) }
@@ -12,6 +13,20 @@ RSpec.describe 'Category delete', type: :feature do
       before do
         create(:user_category, user:, category: category)
         login_as(user)
+        visit categories_path
+      end
+
+      describe 'error 403' do
+        it { expect(page.status_code).to eq(403) }
+      end
+    end
+
+    describe 'when admin is authenticated' do
+      let(:category) { create(:category) }
+
+      before do
+        create(:user_category, user: admin, category: category)
+        login_as(admin)
         visit categories_path
         within('.table') do
           click_button 'Delete'

@@ -4,6 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'Category edit', type: :feature do
   let(:user) { create(:user) }
+  let(:admin) { create(:user, :admin) }
   let!(:category_work) { create(:category) }
   let!(:category_personal) { create(:category) }
 
@@ -14,14 +15,16 @@ RSpec.describe 'Category edit', type: :feature do
       visit edit_category_path(category_work.id, locale: I18n.locale)
     end
 
-    describe 'edit category' do
-      before do
-        fill_in 'Name', with: 'NewCategory'
-        click_button 'Create'
-      end
+    describe 'error 403' do
+      it { expect(page.status_code).to eq(403) }
+    end
+  end
 
-      it { expect(page).to have_content('Categories') }
-      it { expect(page).to have_content('Category updated successfully') }
+  describe 'when admin is authenticated' do
+    before do
+      create(:user_category, user: admin, category: category_work)
+      login_as(admin)
+      visit edit_category_path(category_work.id, locale: I18n.locale)
     end
 
     describe 'name of category has already exist' do
